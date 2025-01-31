@@ -14,21 +14,30 @@ class CreateLeadsTable extends Migration
     public function up()
     {
         Schema::create('leads', function (Blueprint $table) {
-            $table->id();
-            $table->string('lead_name');
-            $table->string('phone_number');
-            $table->string('email')->unique();
-            $table->string('location');
-            $table->enum('property_type', ['House', 'Apartment', 'Condo']);
-            $table->string('budget_from');
-            $table->string('budget_to');
-            $table->integer('bedrooms');
-            $table->integer('bathrooms');
-            $table->date('move_in_date');
-            $table->enum('interest_level', ['High', 'Medium', 'Low']);
-            $table->string('heard_about')->nullable();
-            $table->text('language')->nullable();
-            $table->timestamps();
+            $table->uuid('id')->primary();
+            $table->uuid('assigned_rm_id')->nullable();
+            $table->integer('min_budget')->nullable();
+            $table->integer('max_budget')->nullable();
+            $table->decimal('conversion_probability', 5, 2)->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->string('email', 255)->nullable();
+            $table->json('interaction_history')->nullable();
+            $table->timestamp('last_contact_date')->useCurrent();
+            $table->string('name', 255);
+            $table->string('phone', 20)->nullable();
+            $table->json('preferences')->nullable();
+            $table->string('sentiment', 50)->nullable();
+            $table->string('source', 255)->nullable();
+            $table->string('status', 50)->nullable();
+            $table->json('amenities')->nullable();
+            $table->string('industry')->nullable();
+            $table->string('location')->nullable();
+            $table->string('property_type')->nullable();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->text('additional_preferences')->nullable();
+            $table->boolean('visit_scheduled')->nullable();
+            $table->timestamp('last_visit_date')->useCurrent();
+            $table->timestamp('rm_assigned_at')->useCurrent();
         });
     }
 

@@ -22,3 +22,4 @@ Route::post('/generate-leads', [LeadController::class, 'generateLeads']);
 Route::get('/leads-list', [LeadController::class, 'fetchLeads']);
 Route::post('/generate-rm', [RMController::class, 'generateRM']);
 Route::get('/fetch-rm-list', [RMController::class, 'fetchRMList']);
+Route::post('/call-lead', [LeadController::class, 'callLead']);
